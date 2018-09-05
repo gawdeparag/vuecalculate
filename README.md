@@ -1,4 +1,6 @@
 # vuecalculate
+## A simple calculator using Vue.js and Bootstrap
+![screenshot from 2018-09-05 22-13-34](https://user-images.githubusercontent.com/32009983/45108019-135f0480-b159-11e8-8c99-24b46972fc55.png)
 
 ## Project setup
 ```
@@ -7,7 +9,7 @@ npm install
 
 ### Compiles and hot-reloads for development
 ```
-npm run serve
+npm run dev
 ```
 
 ### Compiles and minifies for production
