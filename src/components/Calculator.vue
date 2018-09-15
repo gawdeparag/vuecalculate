@@ -5,22 +5,27 @@
         <div @click="negate" class="btn">+/-</div>
         <div @click="percentage" class="btn-warning">%</div>
         <div @click="divide" class="btn-warning">/</div>
+        <div @click="mod" class="btn-warning">mod</div>
         <div @click="append('7')" class="btn">7</div>
         <div @click="append('8')" class="btn">8</div>
         <div @click="append('9')" class="btn">9</div>
         <div @click="multiply" class="btn-warning">x</div>
+        <div @click="cube" class="btn-warning">cube</div>
         <div @click="append('4')" class="btn">4</div>
         <div @click="append('5')" class="btn">5</div>
         <div @click="append('6')" class="btn">6</div>
         <div @click="subtract" class="btn-warning">-</div>
-        <div @click="append('1')" class="btn">1</div>
+        <div @click="cubeRoot" class="btn-warning">cbrt</div>
+         <div @click="append('1')" class="btn">1</div>
         <div @click="append('2')" class="btn">2</div>
         <div @click="append('3')" class="btn">3</div>
         <div @click="add" class="btn-warning">+</div>
+        <div @click="square" class="btn-warning">sq.</div>
+         <div @click="raiseToPower" class="btn">^</div>
         <div @click="append('0')" class="btn">0</div>
-        <div @click="square" class="btn">sq.</div>
         <div @click="decimal" class="btn">.</div>
         <div @click="equal" class="btn-warning">=</div>
+        <div @click="squareRoot" class="btn-warning">sqrt</div>
     </div>
 </template>
 
@@ -40,7 +45,7 @@ export default {
     },
     negate() {
       this.current =
-        this.current.charAt(0) === "-" | this.current.charAt(0) === ""
+        (this.current.charAt(0) === "-") | (this.current.charAt(0) === "")
           ? this.current.slice(1)
           : `-${this.current}`;
     },
@@ -79,9 +84,29 @@ export default {
       this.operator = (a, b) => a / b;
       this.setPrevious();
     },
-    square(){
-        this.operator = (a) => Math.pow(a, 2);
-        this.setPrevious();
+    square() {
+      this.operator = a => Math.pow(a, 2);
+      this.setPrevious();
+    },
+    mod() {
+      this.operator = (a, b) => a % b;
+      this.setPrevious();
+    },
+    cube() {
+      this.operator = a => Math.pow(a, 3);
+      this.setPrevious();
+    },
+    raiseToPower() {
+      this.operator = (a, b) => Math.pow(a, b);
+      this.setPrevious();
+    },
+    squareRoot() {
+      this.operator = a => Math.sqrt(a);
+      this.setPrevious();
+    },
+    cubeRoot(){
+      this.operator = a => Math.pow(a, 1/3);
+      this.setPrevious();
     },
     equal() {
       this.current = `${this.operator(
@@ -89,6 +114,7 @@ export default {
         parseFloat(this.current)
       )}`;
       this.previous = null;
+      this.setPrevious();
     }
   }
 };
@@ -102,11 +128,11 @@ export default {
   box-shadow: 5px 10px 8px #888888;
   display: grid;
   border: 1px solid #333;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(5, 1fr);
   grid-auto-rows: minmax(50px, auto);
 }
 .display {
-  grid-column: 1/5;
+  grid-column: 1/6;
   display: block;
 }
 .btn {
